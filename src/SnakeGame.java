@@ -36,7 +36,7 @@ public class SnakeGame extends JFrame {
             }
         });
         for (int i = 0; i < snake.length; i++) {
-            snake.x[i] = (int) (window.getHeight() / 2 + (i * 10)) / 10 * 10;
+            snake.x[i] = (int) (window.getHeight() / 2 - (i * 10)) / 10 * 10;
             snake.y[i] = (int) (window.getHeight() / 2) / 10 * 10;
             snake.facing[i] = 0;
         }
@@ -97,8 +97,8 @@ public class SnakeGame extends JFrame {
             }
             int headX = snake.x[0];
             int headY = snake.y[0];
-            for (int i = 0; i < snake.length - 2; i++) {
-                if (snake.facing[i] % 180 == 0) {
+            for (int i = 0; i < snake.length - 1; i++) {
+                if (snake.facing[i] % 180 != 0) {
                     if (headY > snake.y[i]) {
                         snake.y[i] += snake.speed;
                         snake.facing[i] = 90;
@@ -130,7 +130,7 @@ public class SnakeGame extends JFrame {
                 headX = snake.x[i];
                 headY = snake.y[i];
             }
-            for (int i = snake.length - 1; i > -1; i--) {
+            for (int i = 0; i < snake.length - 1; i++) {
                 g2d.setPaint(Color.GREEN);
                 g2d.fillRect(snake.x[i], snake.y[i], 10, 10);
             }
@@ -157,13 +157,13 @@ public class SnakeGame extends JFrame {
                 snake.length += 1;
                 snake.x[snake.length - 1] = snake.x[snake.length - 2];
                 snake.y[snake.length - 1] = snake.y[snake.length - 2];
-                if (snake.facing[snake.length - 1] == 0) {
+                if (snake.facing[snake.length - 2] == 0) {
                     snake.x[snake.length - 1] -= snake.speed;
-                } else if (snake.facing[snake.length - 1] == 90) {
+                } else if (snake.facing[snake.length - 2] == 90) {
                     snake.y[snake.length - 1] += snake.speed;
-                } else if (snake.facing[snake.length - 1] == 180) {
+                } else if (snake.facing[snake.length - 2] == 180) {
                     snake.x[snake.length - 1] += snake.speed;
-                } else if (snake.facing[snake.length - 1] == 270) {
+                } else if (snake.facing[snake.length - 2] == 270) {
                     snake.y[snake.length - 1] -= snake.speed;
                 }
             }
